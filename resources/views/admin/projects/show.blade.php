@@ -17,8 +17,16 @@
         <hr>
 
         <ul>
-
             <li class="mt-5 fs-5">
+                <span class="fw-bold ">Technologies:
+                </span>
+                @foreach ( $project->technologies as $technology)
+                <span class="badge bg-light text-dark fs-5" > {{ $technology->name }} </span>
+           
+                @endforeach
+           </li>
+
+            <li class="mt-2 fs-5">
                 <span class="fw-bold ">Type:
                 </span>{{ $project->type ? $project->type->name : 'No category for this project' }}
             </li>

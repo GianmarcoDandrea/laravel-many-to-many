@@ -20,9 +20,5 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-
-        ProjectsTableSeeder::class;
-        TypesTableSeeder::class;
-        TechnologiesTableSeeder::class;
     }
 }
