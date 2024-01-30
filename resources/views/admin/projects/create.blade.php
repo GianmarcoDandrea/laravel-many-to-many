@@ -45,18 +45,19 @@
 
 
             <div class="mb-4 has-validation">
-                <p class="form-label fw-bold">Select the technologies of your project</p>
+                <p class="form-label fw-bold">Select the technologies of your project:</p>
                 @foreach ($technologies as $technology)
                     <div class="form-check">
-                        <input class="@error('technology') is-invalid @enderror"" type="checkbox" id="technology-{{ $technology->id }}" value="{{ $technology->id }}" name="technologies[]">
-                        <label for="technology-{{ $technology->id }}"> {{ $technology->name }} </label> 
+                        <input class="@error('technologies') is-invalid @enderror" type="checkbox" id="technology-{{ $technology->id }}" value="{{ $technology->id }}" name="technologies[]">
+                        <label for="technology-{{ $technology->id }}"> {{ $technology->name }} </label>
                     </div> 
                 @endforeach
                 
-                @error('technology')
+                @error('technologies')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
+
 
             <div class="mb-4">
                 <label for="cover_image" class="form-label fw-bold">Image</label>

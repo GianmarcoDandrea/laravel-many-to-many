@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\Type;
+use App\Models\Technology;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
-use App\Models\Technology;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -52,11 +52,15 @@ class ProjectController extends Controller
         $project->fill($form_data);
 
         if($request->hasFile('cover_image')) {
-            $path = Storage::put('post_images', $request->cover_image);
+            $path = Storage::put('projects_images', $request->cover_image);
             $project->cover_image = $path;
         }
 
         $project->save();
+
+        if($request ->has('technologies')) {
+            $project->technologies()->attach($request->technologies);  
+        }
 
         return redirect()->route('admin.projects.show', ['project' => $project->slug]);
     }

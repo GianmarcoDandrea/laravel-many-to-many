@@ -26,9 +26,9 @@ class StoreProjectRequest extends FormRequest
         return [
             'title' => ['required', 'min:5', 'max:300', 'unique:projects'],
             'description' => ['required'],
-            'type_id' => ['nullable', 'exist:types,id'],
+            'type_id' => ['nullable', 'exists:types,id'],
             'cover_image' => ['nullable', 'image', 'max:2048'],
-            'technology'=>['exists:technology,id']
+            'technologies'=>['exists:technologies,id']
         ];
     }
 
@@ -40,7 +40,7 @@ class StoreProjectRequest extends FormRequest
             'title.max' => 'Title lenght must max of :max letters',
             'title.unique' => 'This title is already used. Try another',
             'description.required' => 'Description of the project is required',
-            'technology.exists' => 'Select a valid technology option'
+            'technologies.exists' => 'Select a valid technologies option'
         ];
     }
 }
