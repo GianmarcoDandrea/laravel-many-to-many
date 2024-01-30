@@ -21,21 +21,28 @@
 
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item text-bg-secondary mb-3">
-                                <span class="fw-bold ">Email: </span>{{ $user->email }}
+                                <span class="fw-bold ">Skills: </span> 
                                 
+                                @foreach ( $user->skills as $skill)
+                                <span class="badge bg-dark text-light fs-6" > {{ $skill->name }} </span>
+                                @endforeach
+                           </li>
+
+                            <li class="list-group-item text-bg-secondary mb-3">
+                                <span class="fw-bold ">Email: </span>{{ $user->email }}
                            </li>
                 
                             <li class="list-group-item text-bg-secondary mb-3">
                                 <span class="fw-bold ">Address: 
                                 </span>{{ $user->userDetail ? $user->userDetail->address : 'No address available' }}
                             </li>
-                
-                            <li class="list-group-item text-bg-secondary mb-3">
-                                <span class="fw-bold ">Email: </span> {{ $user->email }}
-                            </li>
                  
                             <li class="list-group-item text-bg-secondary mb-3 ">
                                 <span class="fw-bold">Phone Number: </span> {{ $user->userDetail ? $user->userDetail->phone : 'No phone available' }}
+                            </li>
+
+                            <li class="list-group-item text-bg-secondary mb-3 ">
+                                <span class="fw-bold">Date Of Birth: </span> {{ $user->userDetail ? date('d-m-Y', strtotime(user->userDetail->date_of_birth)) : 'No date available' }}
                             </li>
                         </ul>
                     </div>
