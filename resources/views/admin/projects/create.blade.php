@@ -46,13 +46,21 @@
 
             <div class="mb-4 has-validation">
                 <p class="form-label fw-bold">Select the technologies of your project:</p>
+
                 @foreach ($technologies as $technology)
                     <div class="form-check">
-                        <input class="@error('technologies') is-invalid @enderror" type="checkbox" id="technology-{{ $technology->id }}" value="{{ $technology->id }}" name="technologies[]">
+                        <input @checked(in_array($technology->id, old('technologies', [])))
+                            type="checkbox"
+                            class="@error('technologies') is-invalid @enderror" 
+                            id="technology-{{ $technology->id }}"
+                            value="{{ $technology->id }}" 
+                            name="technologies[]">
+
                         <label for="technology-{{ $technology->id }}"> {{ $technology->name }} </label>
-                    </div> 
+                    </div>
                 @endforeach
-                
+
+
                 @error('technologies')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -61,8 +69,7 @@
 
             <div class="mb-4">
                 <label for="cover_image" class="form-label fw-bold">Image</label>
-                <input type="file" class="form-control @error('cover_image') is-invalid @enderror" id="cover_image"
-                    name="cover_image">
+                <input type="file" class="form-control @error('cover_image') is-invalid @enderror" id="cover_image" name="cover_image">
 
                 @error('cover_image')
                     <div class="invalid-feedback">{{ $message }}</div>

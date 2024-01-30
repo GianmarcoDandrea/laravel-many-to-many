@@ -28,7 +28,8 @@ class UpdateProjectRequest extends FormRequest
             'title' => ['required', 'min:5', 'max:300', Rule::unique('projects')->ignore($this->project)],
             'description' => ['required'],
             'type_id' => ['nullable', 'exists:types,id'],
-            'cover_image' => ['nullable', 'image', 'max:2048']
+            'cover_image' => ['nullable', 'image', 'max:2048'],
+            'technologies'=>['exists:technologies,id']
 
         ];
     }
@@ -41,6 +42,7 @@ class UpdateProjectRequest extends FormRequest
             'title.min' => 'Title lenght must be at least of :min letters',
             'title.max' => 'Title lenght must max of :max letters',
             'description.required' => 'Description of the project is required',
+            'technologies.exists' => 'Select a valid technologies option'
         ];
     }
 }

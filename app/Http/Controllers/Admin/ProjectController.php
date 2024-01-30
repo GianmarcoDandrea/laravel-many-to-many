@@ -33,10 +33,10 @@ class ProjectController extends Controller
     public function create()
 
     {
-        $types=Type::all();
+        $types = Type::all();
         $technologies = Technology::all();
 
-        return view('admin.projects.create',compact('types', 'technologies'));
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -51,15 +51,15 @@ class ProjectController extends Controller
         $project = new Project();
         $project->fill($form_data);
 
-        if($request->hasFile('cover_image')) {
+        if ($request->hasFile('cover_image')) {
             $path = Storage::put('projects_images', $request->cover_image);
             $project->cover_image = $path;
         }
 
         $project->save();
 
-        if($request ->has('technologies')) {
-            $project->technologies()->attach($request->technologies);  
+        if ($request->has('technologies')) {
+            $project->technologies()->attach($request->technologies);
         }
 
         return redirect()->route('admin.projects.show', ['project' => $project->slug]);
@@ -86,8 +86,10 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
+        $technologies = Technology::all();
 
-        return view('admin.projects.edit', compact('project','types'));
+
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -102,13 +104,19 @@ class ProjectController extends Controller
         $form_data = $request->validated();
         $project->update($form_data);
 
-        if($request->hasFile('cover_image')) {
-            if($project->cover_image) {
+        if ($request->hasFile('cover_image')) {
+            if ($project->cover_image) {
                 Storage::delete($project->cover_image);
             }
 
-            $path = Storage::put('project_images', $request->cover_image);
+            $path = Storage::put('projects_images', $request->cover_image);
             $form_data['cover_image'] = $path;
+        }
+
+        if ($request->has('technologies')) {
+            $project->technologies()->sync($request->technologies); // sync() va a sincronizzare i nuovi dati da salvare con i dati ottenuti dal $request
+        } else {
+            $project->technologies()->sync([]);
         }
 
         return redirect()->route('admin.projects.show', ['project' => $project->slug]);
@@ -124,7 +132,7 @@ class ProjectController extends Controller
     {
         $project = Project::where('slug', $slug)->first();
         $project->delete();
-
+        
         Storage::delete($project->cover_image);
 
         return redirect()->route('admin.projects.index')->with('message', 'The project "' . $project->title . '" has been deleted');
