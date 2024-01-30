@@ -7,8 +7,8 @@
         <form class="mt-5" action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
-            <div class="mb-3 has-validation">
-                <label for="title" class="form-label">Title</label>
+            <div class="mb-4 has-validation">
+                <label for="title" class="form-label fw-bold">Title</label>
                 <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title"
                     value="{{ old('title') }}">
 
@@ -17,8 +17,8 @@
                 @enderror
             </div>
 
-            <div class="mb-3 has-validation">
-                <label class="description-box" for="description" class="form-label">Description</label>
+            <div class="mb-4 has-validation">
+                <label class="description-box form-label fw-bold" for="description">Description</label>
                 <textarea class="form-control @error('description') is-invalid @enderror" id="description" rows="3"
                     name="description">{{ old('description') }}</textarea>
 
@@ -27,8 +27,8 @@
                 @enderror
             </div>
 
-            <div class="mb-3 has-validation">
-                <label for="type">Select type of your project:</label>
+            <div class="mb-4 has-validation">
+                <label for="type" class="form-label fw-bold">Select type of your project:</label>
                 <select class="form-select @error('type') is-invalid @enderror" name="type_id" id="type">
                     <option @selected(!old('type_id')) value="">No type</option>
 
@@ -43,10 +43,26 @@
                 @enderror
             </div>
 
-            <div class="mb-3">
-                <label for="cover_image" class="form-label">Immagine</label>
+
+            <div class="mb-4 has-validation">
+                <p class="form-label fw-bold">Select the technologies of your project</p>
+                @foreach ($technologies as $technology)
+                    <div class="form-check">
+                        <input class="@error('technology') is-invalid @enderror"" type="checkbox" id="technology-{{ $technology->id }}" value="{{ $technology->id }}" name="technologies[]">
+                        <label for="technology-{{ $technology->id }}"> {{ $technology->name }} </label> 
+                    </div> 
+                @endforeach
+                
+                @error('technology')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mb-4">
+                <label for="cover_image" class="form-label fw-bold">Image</label>
                 <input type="file" class="form-control @error('cover_image') is-invalid @enderror" id="cover_image"
                     name="cover_image">
+
                 @error('cover_image')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
