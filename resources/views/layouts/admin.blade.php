@@ -77,6 +77,10 @@
                                     href="{{ route('admin.types.index') }}">
                                     <i class="fa-solid fa-list fa-lg fa-fw"></i> Projects Types
                                 </a>
+                                <a class="nav-link text-white {{ Route::currentRouteName() == 'dashboard' ? 'bg-secondary' : '' }}"
+                                    href="{{ route('admin.technologies.index') }}">
+                                    <i class="fa-solid fa-microchip fa-lg fa-fw"></i> Projects Technologies
+                                </a>
                             </li>
                         </ul>
 
