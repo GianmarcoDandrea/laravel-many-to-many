@@ -22,10 +22,18 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item text-bg-secondary mb-3">
                                 <span class="fw-bold ">Skills: </span> 
-                                
+                                @if (count($user->skills) > 0)
+
                                 @foreach ( $user->skills as $skill)
                                 <span class="badge bg-dark text-light fs-6" > {{ $skill->name }} </span>
                                 @endforeach
+                                    
+                                @else
+
+                                <span class="fs-6" > No skill available </span>
+
+                                @endif
+                                
                            </li>
 
                             <li class="list-group-item text-bg-secondary mb-3">
