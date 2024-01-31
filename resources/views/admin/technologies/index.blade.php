@@ -3,12 +3,6 @@
 @section('content')
     <div class="container mt-5" >
 
-        @if (Session::has('message'))
-            <div class="alert alert-success w-50 mx-auto">
-                {{ Session::get('message') }}
-            </div>
-        @endif
-
         <div class="w-100 d-flex justify-content-between gap-5" >
             <div class="list-type-section w-50">
                 <h2 class="mb-5">List of Technologies </h2>

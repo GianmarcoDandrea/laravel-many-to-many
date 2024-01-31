@@ -25,7 +25,7 @@ class UpdateTechnologyRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'min:5', 'max:50', Rule::unique('technologies')->ignore($this->technology)],
+            'name' => ['required', 'max:50', Rule::unique('technologies')->ignore($this->technology)],
         ];
     }
 
@@ -33,7 +33,6 @@ class UpdateTechnologyRequest extends FormRequest
     {
         return [
             'name.required' => 'Name of the technology is required',
-            'name.min' => 'Name lenght must be at least of :min letters',
             'name.max' => 'Name lenght must max of :max letters',
             'name.unique' => 'This name is already used. Try another'
         ];

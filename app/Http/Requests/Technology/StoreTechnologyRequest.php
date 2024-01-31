@@ -24,7 +24,7 @@ class StoreTechnologyRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'min:5', 'max:50', 'unique:types'],
+            'name' => ['required', 'max:50', 'unique:technologies'],
         ];
     }
 
@@ -32,7 +32,6 @@ class StoreTechnologyRequest extends FormRequest
     {
         return [
             'name.required' => 'Name of the technology is required',
-            'name.min' => 'Name lenght must be at least of :min letters',
             'name.max' => 'Name lenght must max of :max letters',
             'name.unique' => 'This name is already used. Try another'
         ];
