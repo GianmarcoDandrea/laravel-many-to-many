@@ -28,7 +28,7 @@
 
             <li class="mt-2 fs-5">
                 <span class="fw-bold ">Type:
-                </span>{{ $project->type ? $project->type->name : 'No category for this project' }}
+                </span>{{ $project->type ? $project->type->name : 'No type for this project' }}
             </li>
 
             <li class="mt-2 fs-5">
